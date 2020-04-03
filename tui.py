@@ -30,4 +30,5 @@ class App(npyscreen.NPSApp):
 
 if __name__ == "__main__":
     Textovka = App()
+    Textovka.main
     Textovka.run()
