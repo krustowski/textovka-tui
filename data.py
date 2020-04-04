@@ -1,42 +1,59 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
 import json
 import requests
 
+# api vars
 endpoint = "https://text.n0p.cz/" 
 apikey   = ""
 action   = ""
 
-# TODO: write file 'apikey' to the actual directory if it is not present, prompt for nickname and perform a register call to API
-
-# load apikey
+# load/fetch apikey
 try:
     with open("./apikey") as f:
+        print("Loading apikey from a file...")
         apikey = f.readlines()[0]
 
-except IOError:
-    # file not found -> perform a register call
-    #print("File not accessible")
-
-    # prompt 
+except FileNotFoundError:
+    # prompt for nickname
     nickname = "krusty"
 
     # get the JSON from API
+    print("Sending a register call...")
     response = requests.get(endpoint + "?register=" + nickname)
     data = json.loads(response.text)
 
-    if data["api"]["apikey"] == None:
-        print("User already exists or API error")
-    else:
-        # unknown permissions in such dir => unstable approach
+    if (data["api"]["status_code"] == 403):
+        print("User already exists...")
+        exit()
+
+    try:
         f = open("./apikey", "w")
-        f.write(data["api"]["apikey"])
+        apikey = data["api"]["apikey"]
+        f.write(apikey)
         f.close()
 
+    except PermissionError:
+        print("Check the write permission in this folder...")
+        exit()
+    
+except PermissionError:
+    print("Check the read permission in this folder...")
+    exit()
+
+except IOError:
+    print("Generic IO Error...")
+    exit()
+
 # get the JSON from API
+print("Performing a casual API call...")
 response = requests.get(endpoint + "?apikey=" + apikey + "&action=" + action)
 data = json.loads(response.text)
 
 try:
     # load arrays from a registered user
+    print("Loading user data...")
     api     = data["api"]
     player  = data["player"]
     room    = data["room"]
@@ -44,5 +61,7 @@ try:
 
     print(message)
 
-except EnvironmentError as e:
-    print("invalid JSON data from API (" + e + ")")
+   # ok -> load TUI 
+
+except KeyError:
+    print("Invalid JSON data from API...")
