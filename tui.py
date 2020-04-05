@@ -1,5 +1,11 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+
 import npyscreen
 from api import Api
+
+class msgBox(npyscreen.BoxTitle):
+    _contained_widget = npyscreen.MultiLineEdit
 
 class textovkaForm(npyscreen.Form):
 
@@ -12,23 +18,29 @@ class textovkaForm(npyscreen.Form):
         actions.extend(["go-north", "go-south", "go-east", "go-west"])
 
         # get inventary
-        inventary = api.player["inventary"] if api.player["inventary"] != None else []
+        inventary = a.player["inventary"] if a.player["inventary"] != None else []
 
         # update the form
         self.hp.value = a.player["hp"]
         self.inventary.values = inventary
         self.message.value = a.message
-        self.message.rely = 7 + len(inventary) - 1
-        self.actions.values = actions
-        self.actions.value = [0]
+        self.message.rely = 7 + (len(inventary) - 1 if len(inventary) > 0 else 0)
         self.actions.max_height = len(actions)
-        self.actions.rely = 9 + len(inventary) - 1 + a.message.count("\n")
+        self.actions.values = actions
+        self.actions.value = [0,]
+        self.actions.rely = 14 + (len(inventary) - 1 if len(inventary) > 0 else 0) + a.message.count("\n")
 
         # shall we continue?
+        if a.player["game_ended"]:
+            self.actions.editable = False
+            self.actions.hidden = True
+
+        """
         if a.player["game_ended"]:
             self.parentApp.setNextForm(None)
         else:
             self.parentApp.setNextForm("MAIN")
+        """
 
     def create(self):
         # get inventary
@@ -42,10 +54,11 @@ class textovkaForm(npyscreen.Form):
         self.nickname = self.add(npyscreen.TitleText, name = "nickname", editable = False, value = api.player["nickname"])
         self.hp = self.add(npyscreen.TitleSlider, out_of = 100.0, label = True, name = "hp", editable = False, value = api.player["hp"])
         self.inventary = self.add(npyscreen.TitleSelectOne, scroll_exit = True, name = "inventary", values = inventary, rely = 5, editable = False)
-        self.message = self.add(npyscreen.TitleText, name = "message", value = api.message, editable = False, rely = 7 + len(inventary) - 1)
-        self.actions = self.add(npyscreen.TitleSelectOne, scroll_exit = True, max_height = len(actions), name = "actions", values = actions, value = [0], rely = 9 + len(inventary) -1 + api.message.count("\n"))
+        #self.message = self.add(npyscreen.MultiLineEdit, name = "message", value = api.message, editable = False, relx = 18, rely = 8 + (len(inventary) - 1 if len(inventary) > 0 else 0))
+        self.message = self.add(msgBox, name = "message", value = api.message, editable = False, relx = 3, rely = 7 + (len(inventary) - 1 if len(inventary) > 0 else 0), max_height = 7, color = "CONTROL")
+        self.actions = self.add(npyscreen.TitleSelectOne, scroll_exit = True, max_height = len(actions), name = "actions", values = actions, value = [0,], rely = 14 + (len(inventary) - 1 if len(inventary) > 0 else 0) + api.message.count("\n"))
 
-        # hide the actions, if game is over
+        # hide the actions, if the game is over
         if api.player["game_ended"]:
             self.actions.editable = False
             self.actions.hidden = True

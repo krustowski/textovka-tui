@@ -77,6 +77,10 @@ class Api:
         response = requests.get(self.endpoint + "?apikey=" + self.apikey)
         data = json.loads(response.text)
 
+        if (data["api"]["status_code"] != 200):
+            print("Bad apikey...")
+            exit()
+
         try:
             # load arrays from a registered user
             #print("Loading user data...")
