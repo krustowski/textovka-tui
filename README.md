@@ -8,8 +8,6 @@ https://text.n0p.cz/
 Documentation:\
 https://wiki.n0p.cz/doku.php?id=misc:textovka
 
-------------
-
 ## Running the TUI
 
 Make sure your python3 environment is all set up first:
