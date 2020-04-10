@@ -44,6 +44,10 @@ class textovkaForm(npyscreen.Form):
             self.actions.editable = False
             self.actions.hidden = True
 
+        if api.player["hp"] <= 0:
+            self.actions.editable = False
+            self.actions.hidden = True
+
         """
         if a.player["game_ended"]:
             self.parentApp.setNextForm(None)
@@ -69,6 +73,10 @@ class textovkaForm(npyscreen.Form):
 
         # hide the actions, if the game is over
         if api.player["game_ended"]:
+            self.actions.editable = False
+            self.actions.hidden = True
+
+        if api.player["hp"] <= 0:
             self.actions.editable = False
             self.actions.hidden = True
 
