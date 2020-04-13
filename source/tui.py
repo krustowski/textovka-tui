@@ -9,6 +9,7 @@ __version__ = "1.0"
 
 import npyscreen
 from source.api import Api
+import time
 
 api = Api()
 
@@ -16,10 +17,11 @@ class msgBox(npyscreen.BoxTitle):
     _contained_widget = npyscreen.MultiLineEdit
 
 class textovkaForm(npyscreen.Form):
-
     def afterEditing(self):
         # send an action
+        ping = int(time.time() * 1000)
         a = api.sendAction(self.actions.get_selected_objects()[0])
+        pong = int(time.time() * 1000) - ping
 
         # get inventary
         inventary = a.player["inventary"] if a.player["inventary"] != None else []
@@ -29,7 +31,7 @@ class textovkaForm(npyscreen.Form):
         actions.extend(["go-north", "go-south", "go-east", "go-west"])
 
         # update the form
-        self.name = "textovka (api: " + a.api["version"] + ") (room: " + a.player["room"] + ")"
+        self.name = "textovka (api: " + a.api["version"] + ") (room: " + a.player["room"] + ") (ping: " + str(pong) + " ms)"
         self.hp.value = a.player["hp"]
         self.inventary.values = inventary
         self.message.value = a.message
@@ -76,6 +78,7 @@ class textovkaForm(npyscreen.Form):
             self.actions.editable = False
             self.actions.hidden = True
 
+        # ...or the player is dead
         if api.player["hp"] <= 0:
             self.actions.editable = False
             self.actions.hidden = True
