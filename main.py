@@ -7,8 +7,16 @@ __email__ = "k@n0p.cz"
 __date__ = "Sunday, Apr 5, 2020"
 __version__ = "1.0"
 
-import npyscreen
+try:
+    import npyscreen
+    import requests
+except:
+    print("Run './setup.py install' first...")
+    exit()
+
 from source.tui import textovkaTUI
+
+endpoint = "https://text.n0p.cz/"
 
 if __name__ == "__main__":
     #print(api.sendAction().message)

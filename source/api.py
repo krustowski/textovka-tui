@@ -7,8 +7,12 @@ __email__ = "k@n0p.cz"
 __date__ = "Sunday, Apr 5, 2020"
 __version__ = "1.0"
 
-import json
-import requests
+try:
+    import json
+    import requests
+except:
+    print("Run './setup.py install' first...")
+    exit()
 
 class Api:
     # api vars
@@ -48,7 +52,12 @@ class Api:
 
             # get the JSON from API
             #print("Sending a register call...")
-            response = requests.get(self.endpoint + "?register=" + self.nickname)
+            try:
+                response = requests.get(self.endpoint + "?register=" + self.nickname)
+            except ConnectionError:
+                print("Cannot connect to the server...")
+                exit()
+
             data = json.loads(response.text)
 
             if (data["api"]["status_code"] == 403):
@@ -80,7 +89,12 @@ class Api:
     def loadUserData(self):
         # get the JSON from API
         #print("Performing a casual API call...")
-        response = requests.get(self.endpoint + "?apikey=" + self.apikey)
+        try:
+            response = requests.get(self.endpoint + "?apikey=" + self.apikey)
+        except:
+            print("Cannot connect to the server...")
+            exit()
+
         data = json.loads(response.text)
 
         if (data["api"]["status_code"] != 200):
@@ -103,7 +117,12 @@ class Api:
         if (action != ""):
             self.action = action
 
-        response = requests.get(self.endpoint + "?apikey=" + self.apikey + "&action=" + self.action)
+        try:
+            response = requests.get(self.endpoint + "?apikey=" + self.apikey + "&action=" + self.action)
+        except:
+            print("Cannot connect to the server...")
+            exit()
+
         data = json.loads(response.text)
 
         # reload data

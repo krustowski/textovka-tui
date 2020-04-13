@@ -7,7 +7,12 @@ __email__ = "k@n0p.cz"
 __date__ = "Sunday, Apr 5, 2020"
 __version__ = "1.0"
 
-import npyscreen
+try:
+    import npyscreen
+except:
+    print("Run './setup.py install' first...")
+    exit()
+
 from source.api import Api
 import time
 
