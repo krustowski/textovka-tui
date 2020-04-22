@@ -125,8 +125,8 @@ class Api:
 
         data = json.loads(response.text)
 
-        if (data["api"]["status_code"] != 200):
-            print("Internal server error (maybe all the data were flushed - remove apikey a try again).")
+        if (data["api"]["status_code"] == 401):
+            print("Internal server error (flushed data, remove the apikey file and try again...)")
             exit()
 
         # reload data
