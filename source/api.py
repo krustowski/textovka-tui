@@ -125,6 +125,10 @@ class Api:
 
         data = json.loads(response.text)
 
+        if (data["api"]["status_code"] != 200):
+            print("Internal server error (maybe all the data were flushed - remove apikey a try again).")
+            exit()
+
         # reload data
         self.api       = data["api"]
         self.player    = data["player"]
