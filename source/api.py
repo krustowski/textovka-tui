@@ -54,7 +54,7 @@ class Api:
             #print("Sending a register call...")
             try:
                 response = requests.get(self.endpoint + "?register=" + self.nickname)
-            except ConnectionError:
+            except:
                 print("Cannot connect to the server...")
                 exit()
 
