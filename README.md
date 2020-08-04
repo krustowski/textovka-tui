@@ -5,8 +5,8 @@ python3 TUI for PHP REST API text-based game v1
 API endpoint:\
 https://text.n0p.cz/
 
-API documentation (CZ):\
-https://wiki.n0p.cz/doku.php?id=misc:textovka
+API documentation:\
+https://github.com/krustowski/textovka-api
 
 ## Running the TUI
 
