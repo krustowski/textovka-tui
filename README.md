@@ -24,5 +24,15 @@ Then just run the `main.py` script, choose a nickname and start the game!
 python3 main.py
 ```
 
-By performing a registration (choosing a nickname) a new file called `apikey` is created in the actual directory. 
+By performing a registration (script is prompting for a nickname) a new file called `apikey` is created in the actual working directory. 
 The file will contain the unique API key used for sending game actions and retrieving the actual player data.
+
+## TUI preview
+
+[tui_started]: img/tui_started.png "TUI started"
+
+[tui_actions]: img/tui_actions.png "TUI map-defined action"
+
+[tui_hp_fall]: img/tui_hp_fall.png "TUI HP fall (drowning)"
+
+[tui_dead]: img/tui_dead.png "TUI after death"
