@@ -3,7 +3,7 @@
 
 __author__ = "krustowski"
 __email__ = "k@n0p.cz"
-#__license__ = "MIT"
+__license__ = "MIT"
 __date__ = "Sunday, Apr 5, 2020"
 __version__ = "1.0"
 
@@ -32,7 +32,8 @@ class textovkaForm(npyscreen.Form):
         inventary = a.player["inventary"] if a.player["inventary"] != None else []
 
         # get room actions
-        actions = a.room["actions"] if a.room["actions"] != None else []
+        actions = []#[""] bug
+        actions.extend(a.room["actions"] if a.room["actions"] != None else [])
         actions.extend(["go-north", "go-south", "go-east", "go-west"])
 
         # update the form
@@ -67,7 +68,8 @@ class textovkaForm(npyscreen.Form):
         inventary = api.player["inventary"] if api.player["inventary"] != None else []
 
         # get room actions
-        actions = api.room["actions"] if api.room["actions"] != None else []
+        actions = []#[""] bug
+        actions.extend(api.room["actions"] if api.room["actions"] != None else [])
         actions.extend(["go-north", "go-south", "go-east", "go-west"])
 
         # form objects init
