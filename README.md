@@ -1,6 +1,6 @@
 # textovka TUI
 
-python3 TUI for PHP REST API text-based game v1
+python3.7 TUI for PHP REST API text-based game v1
 
 API endpoint:\
 https://text.n0p.cz/
