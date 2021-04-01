@@ -1,6 +1,6 @@
 # textovka TUI
 
-python3.7 TUI for PHP REST API text-based game v1
+python3.7 TUI client for PHP REST API text-based game v1
 
 API endpoint:\
 https://text.n0p.cz/
@@ -9,6 +9,15 @@ API documentation:\
 https://github.com/krustowski/textovka-api
 
 ## Running the TUI
+
+### Docker
+
+Just install docker engine, clone this repo and run the project:
+```bash
+make run
+```
+
+### Other (legacy)
 
 Make sure your python3 environment is all set up first:
 
