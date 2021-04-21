@@ -17,6 +17,10 @@ Just install docker engine, clone this repo and run the project:
 make run
 ```
 
+If you want to end, just hit CTRL-C to exit the game. 
+
+If your game ended somehow (you died, or you won), just remove tmp/apikey file in the cloned repository and start again (but with different nickname this time)!
+
 ### Other (legacy)
 
 Make sure your python3 environment is all set up first:

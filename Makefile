@@ -1,3 +1,6 @@
+APP_ROOT?=/opt/tui
+TAG?=text-tui
+
 .PHONY: run main setup
 
 all: info
@@ -7,4 +10,5 @@ info:
 
 run:
 	@echo "\n Building and starting docker project ...\n"
-	@docker build -t text-tui . && docker run -it --rm text-tui
+	@mkdir -p tmp && chmod a+w tmp
+	@docker build -t ${TAG} . && docker run -it --rm -v `pwd`/tmp:${APP_ROOT}/tmp ${TAG}

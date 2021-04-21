@@ -32,7 +32,7 @@ class Api:
     def getKey(self):
         # load/fetch apikey
         try:
-            with open("./apikey") as f:
+            with open("tmp/apikey") as f:
                 #print("Loading apikey from a file...")
                 self.apikey = f.readlines()[0]
 
@@ -65,7 +65,7 @@ class Api:
                 exit()
 
             try:
-                f = open("./apikey", "w")
+                f = open("tmp/apikey", "w")
                 self.apikey = data["api"]["apikey"]
                 f.write(self.apikey)
                 f.close()
