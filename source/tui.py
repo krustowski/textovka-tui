@@ -93,3 +93,8 @@ class textovkaForm(npyscreen.Form):
 class textovkaTUI(npyscreen.NPSAppManaged):
     def onStart(self):
         self.addForm("MAIN", textovkaForm, name = "textovka (api: " + api.api["version"] + ") (room: " + api.player["room"] + ")")
+    
+    def exitApplication(self):
+        self.setNextForm(None)
+        self.editing = False
+

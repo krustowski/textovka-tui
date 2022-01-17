@@ -6,9 +6,9 @@ TAG?=text-tui
 all: info
 
 info:
-	@echo "\n make run -- run the project in docker\n"
+	@echo -e "\n make run -- run the project in docker\n"
 
 run:
-	@echo "\n Building and starting docker project ...\n"
+	@echo -e "\n Building and starting docker project ...\n"
 	@mkdir -p tmp && chmod a+w tmp
 	@docker build -t ${TAG} . && docker run -it --rm -v `pwd`/tmp:${APP_ROOT}/tmp ${TAG}
