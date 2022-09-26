@@ -37,7 +37,7 @@ class textovkaForm(npyscreen.Form):
         actions.extend(["go-north", "go-south", "go-east", "go-west"])
 
         # update the form
-        self.name = "textovka (api: " + a.api["version"] + ") (room: " + a.player["room"] + ") (ping: " + str(pong) + " ms)"
+        self.name = "textovka (api: " + a.api["version"] + ") (map/room: " + a.player["map_name"] + "/" + a.player["room"] + ") (ping: " + str(pong) + " ms)"
         self.hp.value = a.player["hp"]
         self.inventary.values = inventary
         self.message.value = a.message
@@ -92,7 +92,7 @@ class textovkaForm(npyscreen.Form):
 
 class textovkaTUI(npyscreen.NPSAppManaged):
     def onStart(self):
-        self.addForm("MAIN", textovkaForm, name = "textovka (api: " + api.api["version"] + ") (room: " + api.player["room"] + ")")
+        self.addForm("MAIN", textovkaForm, name = "textovka (api: " + api.api["version"] + ") (map/room: " + api.player["map_name"] + "/" + api.player["room"] + ")")
     
     def exitApplication(self):
         self.setNextForm(None)

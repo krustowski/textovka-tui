@@ -22,6 +22,7 @@ class Api:
     api      = []
     nickname = ""
     player   = []
+    map_name = ""
     room     = []
     message  = []
 
@@ -53,7 +54,7 @@ class Api:
             # get the JSON from API
             #print("Sending a register call...")
             try:
-                response = requests.get(self.endpoint + "?register=" + self.nickname)
+                response = requests.get(self.endpoint + "?map=madness&register=" + self.nickname)
             except:
                 print("Cannot connect to the server...")
                 exit()
@@ -108,6 +109,7 @@ class Api:
             self.player    = data["player"]
             self.nickname  = data["player"]["nickname"]
             self.room      = data["room"]
+            self.map_name  = data["player"]["map_name"]
             self.message   = data["message"]
 
         except KeyError:
