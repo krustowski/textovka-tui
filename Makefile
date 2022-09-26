@@ -1,5 +1,5 @@
 APP_ROOT?=/opt/tui
-TAG?=text-tui
+TAG?=textovka-tui
 
 .PHONY: run main setup
 
@@ -11,4 +11,5 @@ info:
 run:
 	@echo -e "\n Building and starting docker project ...\n"
 	@mkdir -p tmp && chmod a+w tmp
-	@docker build -t ${TAG} . && docker run -it --rm -v `pwd`/tmp:${APP_ROOT}/tmp ${TAG}
+	@docker build -t ${TAG} . && \
+		docker run -it --rm -v `pwd`/tmp:${APP_ROOT}/tmp ${TAG}
