@@ -12,7 +12,7 @@ setup(
     author_email='k@n0p.cz',
     description='REST API text-based game in TUI',
     install_requires=[
-        'requests==2.23.0',
+        'requests==2.31.0',
         'npyscreen==4.10.5'
     ]
 )
